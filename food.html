@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FoodFun - Tasty & Fresh Food</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fffdf9;
+      color: #333;
+    }
+
+    header {
+      background-color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 24px;
+      color: #ff6b00;
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      color: white;
+    }
+
+    .hero-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .hero-bg img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .hero-bg img.active {
+      opacity: 1;
+    }
+
+    .hero-bg .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 0 40px;
+      text-align: center;
+    }
+
+    .hero-text h1 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+    }
+
+    /* --- ICON LINKS --- */
+    .icon-section {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+    }
+
+    .icon-section a img {
+      width: 120px;
+      height: auto;
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+
+    .icon-section a img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      background: #ff6b00;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER (ONLY LOGO) -->
+  <header>
+    <div class="logo">FoodFun</div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="https://as2.ftcdn.net/v2/jpg/02/72/83/33/1000_F_272833330_vDxswrzf303aX0a4xe7hIuh90j2FjGRU.jpg" class="active" alt="All chat">
+      <img src="https://as2.ftcdn.net/v2/jpg/09/05/21/47/1000_F_905214739_8OTrWjazQUAgCm8gaYR9iQIzaSOHgLZ3.jpg" alt="Pani Puri">
+      <img src="https://as2.ftcdn.net/v2/jpg/10/95/93/27/1000_F_1095932741_XBzTXXjTKpPmRa3YxWpvXFLkwswnMdo7.jpg" alt="Sev Puri">
+      <div class="overlay"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Welcome to the world of<br/>Tasty & Fresh Food</h1>
+        <p>Healthy, delicious, and made with love. Explore the best meals around you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGIN & ORDER ICONS -->
+  <div class="icon-section">
+    <a href="login page.html" target="_blank">
+      <img src="C:\Users\ADMIN\Downloads\hackathon\eca8de2d-2ef2-4b86-88bd-cc2bfbd0f243.jpg" alt="Login">
+    </a>
+    <a href="owner.html" target="_blank">
+      <img src="C:\Users\ADMIN\Downloads\hackathon\a357ce1d-97f0-4896-b39f-e6f3daa5bc21.jpg" alt="Order Now">
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 FoodFun | Designed with 🍲 for Food Lovers
+  </footer>
+
+  <!-- SLIDESHOW SCRIPT -->
+  <script>
+    const bgSlides = document.querySelectorAll(".hero-bg img");
+    let bgIndex = 0;
+
+    setInterval(() => {
+      bgSlides[bgIndex].classList.remove("active");
+      bgIndex = (bgIndex + 1) % bgSlides.length;
+      bgSlides[bgIndex].classList.add("active");
+    }, 4000);
+  </script>
+
+</body>
+</html>
