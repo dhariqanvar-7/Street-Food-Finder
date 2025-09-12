@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Street Food Market – User</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff5eb;
+    }
+    header {
+      background-color: #ff5e57;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+    .search-bar input {
+      width: 50%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .food-card {
+      width: 300px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .food-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .food-details {
+      padding: 15px;
+    }
+    .food-details h3 {
+      margin-top: 0;
+    }
+    footer {
+      background-color: #ff5e57;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    .no-results {
+      text-align: center;
+      font-size: 18px;
+      padding: 20px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Virtual Street Food Market</h1>
+    <p>Find your favorite street food around you!</p>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search vendors, dishes, or locations...">
+  </div>
+
+  <div class="card-container" id="cardContainer"></div>
+  <div class="no-results" id="noResults" style="display:none;">Go and satisfy your hunger at somewhere else!</div>
+
+  <footer>
+    &copy; 2025 Virtual Street Food Market | Built to Empower Local Vendors
+  </footer>
+
+  <script>
+    const cardContainer = document.getElementById("cardContainer");
+    const searchInput = document.getElementById("searchInput");
+    const noResults = document.getElementById("noResults");
+
+    function renderCards(data) {
+      cardContainer.innerHTML = "";
+      if (data.length === 0) {
+        noResults.style.display = "block";
+      } else {
+        noResults.style.display = "none";
+        data.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "food-card";
+          card.innerHTML = `
+           <img src="${item.imageURL}" alt="${item.name}" />
+            <div class="food-details">
+              <h3>${item.name || 'Unnamed Stall'}</h3>
+              <p><strong>Specialties:</strong> ${item.food || 'N/A'}</p>
+              <p><strong>Location:</strong> ${item.location || 'Unknown'}</p>
+              <p><strong>Contact:</strong> ${item.contact || 'Not Provided'}</p>
+              <p><strong>Discount:</strong> ${item.discount || 0}%</p>
+              <p><strong>Timings:</strong> ${item.timings || 'Not Specified'}</p>
+            </div>
+          `;
+          cardContainer.appendChild(card);
+        });
+      }
+    }
+
+    function loadData() {
+      let data = JSON.parse(localStorage.getItem("foodMenu")) || [];
+      renderCards(data);
+
+      searchInput.addEventListener("input", () => {
+        const value = searchInput.value.toLowerCase();
+        const filtered = data.filter(
+          item =>
+            (item.food && item.food.toLowerCase().includes(value)) ||
+            (item.location && item.location.toLowerCase().includes(value))
+        );
+        renderCards(filtered);
+      });
+    }
+
+    window.onload = loadData;
+  </script>
+</body>
+</html>
